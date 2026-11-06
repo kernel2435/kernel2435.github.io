@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>b站百科-哔哩哔哩百科知识_UP主词条_站内梗科普</title>
+<meta name="description" content="b站百科是面向哔哩哔哩用户的百科知识入口，汇总UP主词条、站内梗科普、分区文化与常见术语，帮助你快速理解B站社区内容与检索方法。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2300a1d6'/%3E%3Cpath d='M18 24h28v18H18z' fill='%23fff'/%3E%3Cpath d='M20 20l6 6M44 20l-6 6' stroke='%23fff' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M26 30v6M38 30v6' stroke='%2300a1d6' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --blue:#00a1d6;
+  --blue-deep:#0b6fa4;
+  --pink:#fb7299;
+  --ink:#1b2430;
+  --ink-2:#465466;
+  --line:#e3e9f0;
+  --bg:#f6f9fc;
+  --white:#fff;
+  --radius:14px;
+  --shadow:0 6px 24px rgba(16,55,90,.07);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB","Source Han Sans SC",system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--blue-deep);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.wrap{width:min(1120px,92vw);margin:0 auto;}
+img,svg{display:block;max-width:100%;}
+
+/* header */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{
+  display:flex;align-items:center;gap:28px;
+  padding:12px 0;
+}
+.logo{
+  display:flex;align-items:center;gap:10px;
+  font-size:20px;font-weight:800;color:var(--ink);
+  letter-spacing:.5px;white-space:nowrap;
+}
+.logo:hover{text-decoration:none;}
+.logo-mark{
+  width:38px;height:38px;border-radius:10px;
+  background:linear-gradient(135deg,var(--blue),var(--pink));
+  display:grid;place-items:center;flex:0 0 auto;
+}
+.logo-mark svg{width:22px;height:22px;}
+.nav{
+  display:flex;gap:4px;flex-wrap:wrap;
+  margin-left:auto;
+}
+.nav a{
+  font-size:14.5px;color:var(--ink-2);
+  padding:6px 12px;border-radius:8px;
+  transition:.18s;
+}
+.nav a:hover{background:#eaf6fc;color:var(--blue-deep);text-decoration:none;}
+
+/* hero */
+.hero{
+  background:
+    radial-gradient(900px 380px at 88% -10%,rgba(251,114,153,.18),transparent 70%),
+    radial-gradient(760px 360px at 6% 0%,rgba(0,161,214,.2),transparent 70%),
+    #fff;
+  border-bottom:1px solid var(--line);
+}
+.hero-inner{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:44px;
+  align-items:center;padding:56px 0 60px;
+}
+.hero h1{
+  font-size:clamp(30px,4.4vw,46px);
+  line-height:1.2;margin:0 0 16px;
+  letter-spacing:-.5px;
+}
+.hero h1 .hl{
+  background:linear-gradient(transparent 62%,rgba(0,161,214,.28) 62%);
+}
+.hero .lede{
+  font-size:16px;color:var(--ink-2);margin:0 0 22px;max-width:34em;
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 22px;border-radius:999px;
+  font-size:15px;font-weight:600;border:1px solid transparent;
+  transition:.2s;
+}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 6px 16px rgba(0,161,214,.3);}
+.btn-primary:hover{background:#0090c1;text-decoration:none;color:#fff;}
+.btn-ghost{background:#fff;border-color:var(--line);color:var(--ink);}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue-deep);text-decoration:none;}
+.btn[aria-disabled="true"]{
+  background:#f0f4f8;color:#8a97a6;border-color:var(--line);
+  box-shadow:none;cursor:default;
+}
+.hero-meta{
+  display:flex;gap:22px;margin-top:26px;flex-wrap:wrap;
+  font-size:13.5px;color:var(--ink-2);
+}
+.hero-meta b{display:block;font-size:20px;color:var(--ink);line-height:1.3;}
+.hero-art{
+  background:#fff;border:1px solid var(--line);border-radius:20px;
+  padding:18px;box-shadow:var(--shadow);
+}
+.hero-art svg{width:100%;height:auto;border-radius:12px;}
+
+/* section base */
+section{padding:56px 0;}
+.sec-head{max-width:46em;margin-bottom:28px;}
+.sec-kicker{
+  display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:1.5px;
+  color:var(--blue-deep);background:#e7f5fc;
+  padding:3px 10px;border-radius:6px;margin-bottom:10px;
+}
+.sec-head h2{font-size:clamp(22px,2.7vw,29px);margin:0 0 10px;line-height:1.35;}
+.sec-head p{margin:0;color:var(--ink-2);font-size:15px;}
+
+/* entry grid */
+.entry-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:8px;
+  transition:transform .2s,border-color .2s;
+}
+.card:hover{transform:translateY(-3px);border-color:#bfe6f5;}
+.card-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:#eaf6fc;display:grid;place-items:center;margin-bottom:4px;
+}
+.card-icon svg{width:22px;height:22px;}
+.card h3{font-size:17px;margin:0;}
+.card p{margin:0;font-size:14.5px;color:var(--ink-2);}
+.card .more{font-size:13.5px;font-weight:600;margin-top:auto;}
+
+/* article list */
+.article-wrap{
+  display:grid;grid-template-columns:1.6fr 1fr;gap:32px;align-items:start;
+}
+.article{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:30px 32px;box-shadow:var(--shadow);
+}
+.article h2{font-size:23px;margin:0 0 14px;}
+.article h3{font-size:16.5px;margin:22px 0 8px;}
+.article p{margin:0 0 12px;font-size:15px;color:#2b3746;}
+.article ul{margin:0 0 14px;padding-left:1.2em;font-size:15px;color:#2b3746;}
+.article li{margin-bottom:6px;}
+.aside{
+  display:flex;flex-direction:column;gap:18px;
+}
+.panel{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px;box-shadow:var(--shadow);
+}
+.panel h3{font-size:15.5px;margin:0 0 12px;display:flex;align-items:center;gap:8px;}
+.panel h3::before{
+  content:"";width:4px;height:15px;border-radius:2px;
+  background:var(--blue);
+}
+.term-list{list-style:none;margin:0;padding:0;font-size:14.5px;}
+.term-list li{
+  display:flex;justify-content:space-between;gap:12px;
+  padding:8px 0;border-bottom:1px dashed var(--line);color:var(--ink-2);
+}
+.term-list li:last-child{border-bottom:0;}
+.term-list b{color:var(--ink);font-weight:600;}
+
+/* search demo */
+.searchbar{
+  display:flex;gap:10px;margin-top:16px;
+}
+.searchbar input{
+  flex:1;min-width:0;padding:11px 14px;font-size:15px;
+  border:1px solid var(--line);border-radius:10px;
+  background:#fbfdff;color:var(--ink);outline:none;
+  font-family:inherit;
+}
+.searchbar input:focus{border-color:var(--blue);background:#fff;}
+.searchbar button{
+  padding:11px 20px;border:0;border-radius:10px;
+  background:var(--blue);color:#fff;font-size:15px;font-weight:600;
+  cursor:pointer;font-family:inherit;
+}
+.searchbar button:hover{background:#0090c1;}
+.search-hint{
+  font-size:13px;color:var(--ink-2);margin-top:10px;min-height:1.5em;
+}
+
+/* steps */
+.steps{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+}
+.step{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;box-shadow:var(--shadow);
+}
+.step .num{
+  font-size:13px;font-weight:800;color:var(--blue);
+  letter-spacing:1px;margin-bottom:8px;
+}
+.step h3{font-size:15.5px;margin:0 0 6px;}
+.step p{margin:0;font-size:14px;color:var(--ink-2);}
+
+/* faq */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.faq details{
+  background:#fff;border:1px solid var(--line);border-radius:12px;
+  padding:16px 20px;box-shadow:var(--shadow);
+}
+.faq summary{
+  cursor:pointer;font-weight:600;font-size:15px;list-style:none;
+  display:flex;justify-content:space-between;gap:12px;align-items:center;
+}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary::after{
+  content:"+";color:var(--blue);font-size:19px;font-weight:700;line-height:1;
+}
+.faq details[open] summary::after{content:"−";}
+.faq details p{margin:10px 0 0;font-size:14.5px;color:var(--ink-2);}
+
+/* footer */
+.site-footer{
+  background:#0f1a26;color:#a9b6c4;
+  padding:44px 0 34px;margin-top:20px;
+}
+.footer-top{
+  display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;
+  padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.1);
+}
+.footer-brand{max-width:26em;}
+.footer-brand .logo{color:#fff;margin-bottom:10px;}
+.footer-brand p{margin:0;font-size:14px;line-height:1.8;}
+.footer-links{display:flex;gap:56px;flex-wrap:wrap;}
+.footer-col h4{font-size:14px;color:#fff;margin:0 0 10px;}
+.footer-col a{
+  display:block;font-size:13.5px;color:#a9b6c4;padding:3px 0;
+}
+.footer-col a:hover{color:#fff;text-decoration:none;}
+.footer-bottom{
+  padding-top:20px;font-size:13px;display:flex;
+  justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+
+/* responsive */
+@media (max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:30px;padding:40px 0 44px;}
+  .hero-art{order:2;}
+  .entry-grid{grid-template-columns:1fr 1fr;}
+  .article-wrap{grid-template-columns:1fr;}
+  .steps{grid-template-columns:1fr 1fr;}
+  .faq{grid-template-columns:1fr;}
+}
+@media (max-width:640px){
+  .header-inner{flex-wrap:wrap;gap:10px;padding:10px 0;}
+  .nav{margin-left:0;width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px;}
+  .nav a{white-space:nowrap;font-size:14px;padding:5px 10px;}
+  section{padding:40px 0;}
+  .entry-grid{grid-template-columns:1fr;}
+  .steps{grid-template-columns:1fr;}
+  .article{padding:22px 20px;}
+  .hero-meta{gap:16px;}
+  .hero-meta b{font-size:18px;}
+  .btn{padding:10px 18px;font-size:14.5px;}
+}
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="#top">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="8" width="18" height="12" rx="2.5"/>
+          <path d="M7 4l3 4M17 4l-3 4M9 13v3M15 13v3"/>
+        </svg>
+      </span>
+      <span>b站百科</span>
+    </a>
+    <nav class="nav" aria-label="主导航">
+      <a href="#entry">知识入口</a>
+      <a href="#guide">检索指南</a>
+      <a href="#terms">术语速查</a>
+      <a href="#faq">常见问题</a>
+      <a href="#about">关于本站</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 首屏 -->
+  <div class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <h1><span class="hl">b站百科</span></h1>
+        <p class="lede">把哔哩哔哩社区里散落的词条、梗与分区文化，整理成能查、能读、能对照的百科入口。无论你是刚注册的新人，还是想系统梳理站内内容的老用户，都可以从这里的分类与检索方法开始。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#entry">进入知识入口</a>
+          <a class="btn btn-ghost" href="#guide">查看检索指南</a>
+        </div>
+        <div class="hero-meta">
+          <div><b>4</b>知识分类</div>
+          <div><b>8</b>常用术语</div>
+          <div><b>5</b>检索步骤</div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#00a1d6"/>
+              <stop offset="1" stop-color="#fb7299"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="420" height="300" rx="14" fill="#f2f9fd"/>
+          <rect x="30" y="34" width="230" height="26" rx="8" fill="#dceef9"/>
+          <rect x="30" y="74" width="150" height="16" rx="6" fill="#e8f3fa"/>
+          <rect x="30" y="102" width="190" height="16" rx="6" fill="#e8f3fa"/>
+          <rect x="30" y="146" width="120" height="102" rx="10" fill="url(#g1)" opacity=".85"/>
+          <rect x="164" y="146" width="96" height="46" rx="10" fill="#fff" stroke="#cfe6f3"/>
+          <rect x="164" y="202" width="96" height="46" rx="10" fill="#fff" stroke="#cfe6f3"/>
+          <rect x="284" y="34" width="106" height="214" rx="12" fill="#fff" stroke="#cfe6f3"/>
+          <circle cx="337" cy="74" r="18" fill="#eaf6fc"/>
+          <rect x="306" y="104" width="62" height="10" rx="5" fill="#dceef9"/>
+          <rect x="306" y="122" width="48" height="10" rx="5" fill="#e8f3fa"/>
+          <rect x="306" y="140" width="56" height="10" rx="5" fill="#e8f3fa"/>
+          <rect x="306" y="176" width="62" height="26" rx="8" fill="#00a1d6" opacity=".9"/>
+          <rect x="306" y="212" width="62" height="14" rx="6" fill="#e8f3fa"/>
+          <path d="M270 60l10 10-10 10" stroke="#fb7299" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- 知识入口 -->
+  <section id="entry">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-kicker">知识入口</span>
+        <h2>先找对分类，再读具体词条</h2>
+        <p>b站百科的内容按使用场景分成几类。每一类都回答一种典型问题，入口的选择比盲目搜索更省时间。</p>
+      </div>
+      <div class="entry-grid">
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0b6fa4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+          </div>
+          <h3>UP主与创作者</h3>
+          <p>记录创作者的身份、分区归属与代表作品类型，帮助读者理解一个账号的内容方向，而不是只记住昵称。</p>
+          <a class="more" href="#guide">了解查询方法 →</a>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0b6fa4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 5h16v12H4z"/><path d="M8 21h8M12 17v4"/>
+            </svg>
+          </div>
+          <h3>站内梗与流行语</h3>
+          <p>解释弹幕与评论区里反复出现的表达，说明它们的来源语境与使用边界，避免脱离场景误用。</p>
+          <a class="more" href="#terms">查看术语速查 →</a>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0b6fa4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/>
+            </svg>
+          </div>
+          <h3>分区与内容生态</h3>
+          <p>梳理动画、游戏、知识、生活等分区的定位差异，说明同一内容为何会出现在不同推荐位置。</p>
+          <a class="more" href="#guide">阅读分区说明 →</a>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0b6fa4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/>
+            </svg>
+          </div>
+          <h3>检索与核对</h3>
+          <p>给出从关键词到站内页面、再到外部资料的核对路径，让词条结论有出处，而不是只凭印象。</p>
+          <a class="more" href="#guide">进入检索指南 →</a>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0b6fa4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 4h14v16H5z"/><path d="M9 8h6M9 12h6M9 16h4"/>
+            </svg>
+          </div>
+          <h3>词条编写规范</h3>
+          <p>说明一个条目应包含定义、来源、使用场景与时间范围，减少把玩笑话当成事实写进百科的情况。</p>
+          <a class="more" href="#about">查看编写说明 →</a>
+        </article>
+        <article class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0b6fa4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3v18M3 12h18"/>
+            </svg>
+          </div>
+          <h3>新词条收录</h3>
+          <p>面向想补充内容的读者，列出可投稿的方向与最低信息要求，先保证准确，再谈完整。</p>
+          <a class="more" href="#faq">查看收录问题 →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 检索指南 + 术语 -->
+  <section id="guide" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="article-wrap">
+        <article class="article">
+          <h2>b站百科的检索路径：从关键词到可核对的结论</h2>
+          <p>访问 b站百科 的读者，多数带着一个具体疑问：某个说法从哪里来、某个账号属于哪个分区、某个词条是否还有别的解释。要回答这类问题，单靠站内搜索框往往不够，需要一条稳定的检索路径。</p>
+          <h3>第一步：确认关键词的完整写法</h3>
+          <p>先写下你要查的完整词，而不是记忆中的缩写。同一个梗可能存在多种写法，b站百科 在词条页会给出常见变体，并提示哪种写法更接近原始语境。这一步决定了后续搜索能否命中。</p>
+          <h3>第二步：在站内定位原始出处</h3>
+          <p>把关键词放回它出现的视频、专栏或评论区，观察上下文。弹幕里的短句常常依赖画面，单独摘出来会走样。b站百科 对这类词条会标注“依赖语境”，提醒读者不要脱离原始内容引用。</p>
+          <h3>第三步：区分事实与社区共识</h3>
+          <ul>
+            <li>事实部分：可查证的发布时间、分区归属、账号身份信息。</li>
+            <li>共识部分：社区对该词条的一般理解，会随时间变化。</li>
+            <li>观点部分：对内容价值的评价，属于个人判断，不宜写成定论。</li>
+          </ul>
+          <p>b站百科 在条目里把这三层分开呈现，读者可以自行判断哪些内容可以直接引用，哪些需要补充说明。</p>
+          <h3>第四步：交叉核对并记录时间</h3>
+          <p>站内信息更新快，词条的含义也可能迁移。记录你查阅的日期，比记住结论本身更有用。若两个来源冲突，优先保留原始出处，并在条目中注明差异。</p>
+          <h3>第五步：回写与补充</h3>
+          <p>查到答案后，如果发现词条缺失或表述含糊，可以按投稿要求补充。b站百科 更看重来源清晰和表述克制，而不是篇幅。</p>
+        </article>
+
+        <aside class="aside">
+          <div class="panel" id="terms">
+            <h3>术语速查</h3>
+            <ul class="term-list">
+              <li><b>弹幕</b><span>视频上方滚动评论</span></li>
+              <li><b>分区</b><span>内容的一级归类</span></li>
+              <li><b>UP主</b><span>内容上传者</span></li>
+              <li><b>投币</b><span>对视频的支持行为</span></li>
+              <li><b>三连</b><span>点赞、投币、收藏</span></li>
+              <li><b>追番</b><span>订阅连载动画</span></li>
+              <li><b>鬼畜</b><span>素材剪辑再创作</span></li>
+              <li><b>专栏</b><span>图文内容形式</span></li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>试试检索</h3>
+            <p style="font-size:14px;color:var(--ink-2);margin:0;">输入词条名称，查看本站收录提示（演示用，不连接外部服务）。</p>
+            <form class="searchbar" id="searchForm" role="search">
+              <label for="q" class="sr-only" style="position:absolute;left:-9999px;">搜索词条</label>
+              <input id="q" type="search" placeholder="例如：弹幕、分区、鬼畜" autocomplete="off">
+              <button type="submit">检索</button>
+            </form>
+            <p class="search-hint" id="searchHint" aria-live="polite"></p>
+          </div>
+          <div class="panel">
+            <h3>下载</h3>
+            <p style="font-size:14px;color:var(--ink-2);margin:0 0 14px;">术语速查表整理版，便于离线对照查阅。</p>
+            <a class="btn btn-ghost" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1" style="pointer-events:none;">下载</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 使用步骤 -->
+  <section id="steps">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-kicker">使用流程</span>
+        <h2>四步读透一个词条</h2>
+        <p>把检索、阅读、核对、记录连成一条线，b站百科 才能从“查一下”变成可复用的资料。</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="num">01</div>
+          <h3>定词</h3>
+          <p>写下完整写法，确认是否存在变体与缩写。</p>
+        </div>
+        <div class="step">
+          <div class="num">02</div>
+          <h3>找源</h3>
+          <p>回到视频或专栏原文，观察词条出现的上下文。</p>
+        </div>
+        <div class="step">
+          <div class="num">03</div>
+          <h3>分层</h3>
+          <p>把事实、共识、观点拆开，避免混为一谈。</p>
+        </div>
+        <div class="step">
+          <div class="num">04</div>
+          <h3>留痕</h3>
+          <p>记下查阅日期与出处，方便日后复核与更新。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="background:#fff;border-top:1px solid var(--line);">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-kicker">常见问题</span>
+        <h2>关于 b站百科 的疑问</h2>
+        <p>下面几个问题覆盖了读者最常遇到的困惑，答案按当前整理范围给出。</p>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>b站百科 是哔哩哔哩官方产品吗？</summary>
+          <p>不是。本站是面向哔哩哔哩用户的百科知识整理入口，栏目与词条由编辑按公开内容归纳，不代表平台官方立场。</p>
+        </details>
+        <details>
+          <summary>词条内容为什么强调出处？</summary>
+          <p>站内梗与用语的含义高度依赖语境，脱离原始视频容易误读。标注出处能让读者自行回到现场核对，也方便后续更新。</p>
+        </details>
+        <details>
+          <summary>发现词条过期怎么办？</summary>
+          <p>可按投稿方向提交修订，说明修改内容与依据。编辑会优先保留可查证的表述，并对存在争议的部分加注说明。</p>
+        </details>
+        <details>
+          <summary>术语速查表能离线使用吗？</summary>
+          <p>整理版下载入口已预留，当前按钮处于禁用状态，待文件确认后开放。页面内表格可直接阅读。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于 -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-kicker">关于本站</span>
+        <h2>把社区语言讲清楚</h2>
+        <p>b站百科 的目标不是覆盖所有内容，而是把最容易误解的那部分讲明白：一个词从哪里来、在什么场景使用、什么时候会变味。我们更愿意写短而准的条目，也不堆砌无法核对的细节。</p>
+        <p style="margin-top:12px;">如果你也常被弹幕里的新词绊住，欢迎从这里开始查，再把你确认过的信息补回来。</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer" id="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="#top">
+          <span class="logo-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="8" width="18" height="12" rx="2.5"/>
+              <path d="M7 4l3 4M17 4l-3 4M9 13v3M15 13v3"/>
+            </svg>
+          </span>
+          <span>b站百科</span>
+        </a>
+        <p>b站百科 是面向哔哩哔哩用户的百科知识入口，整理 UP主词条、站内梗、分区文化与检索方法，内容以可查证与语境清晰为优先。</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>内容</h4>
+          <a href="#entry">知识入口</a>
+          <a href="#guide">检索指南</a>
+          <a href="#terms">术语速查</a>
+        </div>
+        <div class="footer-col">
+          <h4>帮助</h4>
+          <a href="#faq">常见问题</a>
+          <a href="#about">关于本站</a>
+          <a href="#steps">使用流程</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© b站百科 · 知识整理入口</span>
+      <span>内容仅供学习与查阅参考</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var form = document.getElementById('searchForm');
+  var input = document.getElementById('q');
+  var hint = document.getElementById('searchHint');
+  var terms = ['弹幕','分区','UP主','投币','三连','追番','鬼畜','专栏','词条','梗'];
+  if(!form || !input || !hint) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var v = input.value.trim();
+    if(!v){
+      hint.textContent = '请输入要查的词条名称。';
+      return;
+    }
+    var hit = null;
+    for(var i=0;i<terms.length;i++){
+      if(terms[i].indexOf(v) !== -1 || v.indexOf(terms[i]) !== -1){ hit = terms[i]; break; }
+    }
+    if(hit){
+      hint.textContent = '已收录相关词条「' + hit + '」，可先在上方术语速查中对照，再回到检索指南核对出处。';
+    }else{
+      hint.textContent = '暂未收录「' + v + '」。建议先确认完整写法，或按关于本站的说明提交新词条。';
+    }
+  });
+})();
+</script>
+</body>
+      </html>
